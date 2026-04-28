@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="rtl" lang="he">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BIZZARE — Considered Clothing</title>
-  <meta name="description" content="Curated clothing from the brands that matter. Considered fits, refined quality, weekly drops." />
+  <title>BIZZARE — בגדים מובחרים</title>
+  <meta name="description" content="בגדים מובחרים מהמותגים שמובילים. אוסף מוקפד, גזרות מדויקות, דרופים שבועיים." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -21,10 +21,16 @@
       --stone: #C9C2B5;
       --charcoal: #2A2724;
       --noir: #0E0D0C;
+      --font-body: "DM Sans", system-ui, sans-serif;
+      --font-display: "DM Serif Display", Georgia, serif;
+    }
+    [dir="rtl"] {
+      --font-body: "Heebo", system-ui, sans-serif;
+      --font-display: "Frank Ruhl Libre", Georgia, serif;
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: "DM Sans", system-ui, sans-serif;
+      font-family: var(--font-body);
       background: var(--cream);
       color: var(--ink);
       line-height: 1.6;
@@ -34,23 +40,28 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
     button { font: inherit; color: inherit; cursor: pointer; background: none; border: none; }
-    h1, h2, h3, h4 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; line-height: 1.05; }
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; }
     .container { width: min(1320px, 92vw); margin-inline: auto; }
-    .eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+    .eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    [dir="rtl"] .eyebrow { letter-spacing: 0.12em; }
     .italic { font-style: italic; color: var(--tan); }
 
     /* Announcement marquee */
     .announce {
       background: var(--noir); color: var(--cream);
       font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 0.7rem 0; overflow: hidden;
-      position: relative;
+      padding: 0.7rem 0; overflow: hidden; position: relative;
     }
+    [dir="rtl"] .announce { letter-spacing: 0.08em; }
     .announce-track {
       display: flex; gap: 4rem; width: max-content;
       animation: marquee 28s linear infinite;
       white-space: nowrap;
     }
+    [dir="rtl"] .announce-track { animation-direction: reverse; }
     .announce-track span { display: inline-flex; align-items: center; gap: 0.5rem; }
     .announce-track span::before { content: '✦'; opacity: 0.5; }
     @keyframes marquee {
@@ -76,16 +87,21 @@
       font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
       transition: color 0.2s;
     }
+    [dir="rtl"] .nav-link { letter-spacing: 0.08em; font-size: 0.85rem; }
     .nav-link:hover, .nav-link.active { color: var(--tan); }
     .brand-mark {
-      font-family: "DM Serif Display", serif; font-size: 1.5rem;
-      letter-spacing: 0.36em; text-align: center;
+      font-family: "DM Serif Display", "Frank Ruhl Libre", serif;
+      font-size: 1.5rem; letter-spacing: 0.36em; text-align: center;
     }
     .icon-btn {
       display: inline-flex; align-items: center; gap: 0.45rem;
       font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase;
     }
-    .icon-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    [dir="rtl"] .icon-btn { letter-spacing: 0.08em; font-size: 0.82rem; }
+    .icon-btn svg {
+      width: 18px; height: 18px; stroke: currentColor; fill: none;
+      stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+    }
     .bag-count {
       display: inline-flex; align-items: center; justify-content: center;
       min-width: 18px; height: 18px; padding: 0 5px;
@@ -93,26 +109,44 @@
       font-size: 0.62rem; font-weight: 500; letter-spacing: 0;
     }
 
-    /* Hero */
-    .hero {
-      padding: 7rem 0 5rem;
-      text-align: center;
+    /* Language toggle */
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      padding-inline-start: 0.7rem;
+      border-inline-start: 1px solid rgba(26, 24, 22, 0.18);
     }
+    .lang-toggle button {
+      color: var(--ink-soft); padding: 0.2rem 0.1rem;
+      transition: color 0.15s;
+    }
+    .lang-toggle button:hover { color: var(--ink); }
+    .lang-toggle button.active { color: var(--ink); font-weight: 500; }
+    .lang-toggle .sep { color: var(--ink-soft); opacity: 0.55; }
+
+    /* Hero */
+    .hero { padding: 7rem 0 5rem; text-align: center; }
     .hero h1 {
       font-size: clamp(3.2rem, 9vw, 9rem);
       letter-spacing: -0.02em;
     }
+    [dir="rtl"] .hero h1 { letter-spacing: -0.01em; line-height: 1.1; }
     .hero h1 .italic { display: inline-block; }
     .hero .new-season { margin-bottom: 1.4rem; }
-    .hero p.lede { margin-top: 1.4rem; font-size: 1.05rem; letter-spacing: 0.04em; color: var(--ink-soft); }
+    .hero p.lede {
+      margin-top: 1.4rem; font-size: 1.05rem;
+      letter-spacing: 0.04em; color: var(--ink-soft);
+    }
     .hero p.lede strong { color: var(--ink); font-weight: 500; letter-spacing: 0.18em; }
     .cta-row { display: flex; gap: 1rem; justify-content: center; margin-top: 2.8rem; flex-wrap: wrap; }
+
     .btn-primary, .btn-ghost {
       display: inline-flex; align-items: center; gap: 0.6rem;
       padding: 1rem 2.4rem;
       font-size: 0.74rem; letter-spacing: 0.22em; text-transform: uppercase;
       transition: transform 0.18s ease, background 0.2s, color 0.2s;
     }
+    [dir="rtl"] .btn-primary, [dir="rtl"] .btn-ghost { letter-spacing: 0.08em; font-size: 0.84rem; }
     .btn-primary { background: var(--ink); color: var(--cream); }
     .btn-primary:hover { background: var(--charcoal); transform: translateY(-1px); }
     .btn-ghost { border: 1px solid var(--ink); }
@@ -122,18 +156,15 @@
       margin-top: 3rem; font-size: 0.68rem; letter-spacing: 0.32em;
       text-transform: uppercase; color: var(--ink-soft);
     }
+    [dir="rtl"] .scroll-cue { letter-spacing: 0.18em; }
     .scroll-cue::after {
       content: ''; display: block; width: 1px; height: 32px;
       background: var(--ink-soft); margin: 0.8rem auto 0;
     }
 
-    /* Category strip */
-    .categories {
-      padding: 4rem 0 2rem;
-    }
-    .cat-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem;
-    }
+    /* Categories */
+    .categories { padding: 4rem 0 2rem; }
+    .cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; }
     .cat-card {
       aspect-ratio: 4/5; padding: 1.4rem;
       display: flex; flex-direction: column; justify-content: space-between;
@@ -142,12 +173,14 @@
     }
     .cat-card:hover { transform: translateY(-4px); }
     .cat-card .label {
-      font-family: "DM Serif Display", serif; font-size: 1.7rem; line-height: 1.05;
+      font-family: var(--font-display); font-size: 1.7rem; line-height: 1.05;
     }
+    [dir="rtl"] .cat-card .label { font-size: 1.55rem; line-height: 1.15; }
     .cat-card .meta {
       font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
       opacity: 0.75;
     }
+    [dir="rtl"] .cat-card .meta { letter-spacing: 0.1em; font-size: 0.72rem; }
     .cat-card .arrow { font-size: 1.6rem; margin-top: 0.4rem; display: block; }
     .cat-card[data-cat="tops"] { background: var(--sand); }
     .cat-card[data-cat="bottoms"] { background: var(--stone); }
@@ -166,15 +199,14 @@
     .section-head .sub { color: var(--ink-soft); max-width: 380px; font-size: 0.95rem; }
 
     /* Filter pills */
-    .filter-row {
-      display: flex; gap: 0.5rem; flex-wrap: wrap; padding-bottom: 2rem;
-    }
+    .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; padding-bottom: 2rem; }
     .pill {
       padding: 0.55rem 1.15rem;
       border: 1px solid rgba(26, 24, 22, 0.18); border-radius: 999px;
       font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
       transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
+    [dir="rtl"] .pill { letter-spacing: 0.06em; font-size: 0.82rem; }
     .pill:hover { border-color: var(--ink); }
     .pill.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 
@@ -197,18 +229,20 @@
       pointer-events: none; z-index: 1;
     }
     .product-card .pc-mark {
-      position: absolute; top: 1.1rem; right: 1.1rem;
-      font-family: "DM Serif Display", serif; font-size: 1.4rem;
-      opacity: 0.4; line-height: 1;
+      position: absolute; top: 1.1rem;
+      inset-inline-end: 1.1rem;
+      font-family: "DM Serif Display", "Frank Ruhl Libre", serif;
+      font-size: 1.4rem; opacity: 0.4; line-height: 1;
     }
     .product-card .pc-glyph {
       position: absolute; left: 50%; top: 48%; transform: translate(-50%, -50%);
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2.6rem, 4vw, 3.6rem);
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
       font-style: italic; line-height: 1;
       opacity: 0.32; text-align: center; z-index: 1;
       letter-spacing: -0.02em;
     }
+    [dir="rtl"] .product-card .pc-glyph { font-size: clamp(2rem, 3.4vw, 3rem); }
     .product-card .swatch-row {
       position: relative; z-index: 2;
       display: flex; gap: 0.4rem;
@@ -222,23 +256,27 @@
       box-shadow: 0 0 0 1px rgba(0,0,0,0.18);
     }
     .product-card .quick {
-      position: absolute; left: 50%; bottom: 1.2rem; transform: translateX(-50%) translateY(8px);
+      position: absolute; left: 50%; bottom: 1.2rem;
+      transform: translateX(-50%) translateY(8px);
       opacity: 0; transition: opacity 0.25s ease, transform 0.25s ease;
       background: var(--cream); color: var(--ink);
-      padding: 0.7rem 1.4rem; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-      z-index: 3;
+      padding: 0.7rem 1.4rem; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      z-index: 3; white-space: nowrap;
     }
+    [dir="rtl"] .product-card .quick { letter-spacing: 0.06em; font-size: 0.78rem; }
     .product:hover .product-card .quick { opacity: 1; transform: translateX(-50%) translateY(0); }
     .product-card .badge {
-      position: absolute; top: 1.1rem; left: 1.1rem; z-index: 2;
+      position: absolute; top: 1.1rem;
+      inset-inline-start: 1.1rem; z-index: 2;
       padding: 0.32rem 0.65rem;
       font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
     }
+    [dir="rtl"] .product-card .badge { letter-spacing: 0.06em; font-size: 0.7rem; }
     .product-card .badge.sale { background: var(--gold); color: var(--noir); }
     .product-card .badge.new { background: var(--cream); color: var(--noir); }
     .product-card .badge.lowstock { background: var(--noir); color: var(--cream); }
 
-    /* Stylized color blocks per product */
     .pc-1 { background: linear-gradient(160deg, #2A2724 0%, #0E0D0C 100%); color: var(--cream); }
     .pc-2 { background: linear-gradient(160deg, #6F6962 0%, #4A453F 100%); color: var(--cream); }
     .pc-3 { background: linear-gradient(160deg, #EFE8DA 0%, #DBD1BC 100%); color: var(--ink); }
@@ -256,9 +294,18 @@
       display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
     }
     .product .info .name { font-size: 0.92rem; line-height: 1.35; }
-    .product .info .name .desc { display: block; color: var(--ink-soft); font-size: 0.76rem; margin-top: 0.18rem; }
-    .product .info .price { font-size: 0.92rem; white-space: nowrap; }
-    .product .info .price .strike { color: var(--ink-soft); text-decoration: line-through; margin-right: 0.5rem; font-size: 0.8rem; }
+    .product .info .name .desc {
+      display: block; color: var(--ink-soft);
+      font-size: 0.76rem; margin-top: 0.18rem;
+    }
+    .product .info .price {
+      font-size: 0.92rem; white-space: nowrap;
+      direction: ltr; unicode-bidi: isolate;
+    }
+    .product .info .price .strike {
+      color: var(--ink-soft); text-decoration: line-through;
+      margin-inline-end: 0.5rem; font-size: 0.8rem;
+    }
     .product .info .price .now { color: var(--gold); font-weight: 500; }
 
     .view-all-row { padding: 2.6rem 0 1rem; text-align: center; }
@@ -280,15 +327,20 @@
       font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
       margin-bottom: 1.6rem;
     }
+    [dir="rtl"] .sale .pill-tag { letter-spacing: 0.08em; font-size: 0.74rem; }
     .sale h2 { font-size: clamp(2.8rem, 7vw, 5.8rem); position: relative; }
     .sale h2 .gold { color: var(--gold); font-style: italic; }
-    .sale p { margin: 1.6rem auto 2.6rem; max-width: 480px; opacity: 0.78; position: relative; }
+    .sale p {
+      margin: 1.6rem auto 2.6rem; max-width: 480px;
+      opacity: 0.78; position: relative;
+    }
     .sale .btn-primary { background: var(--gold); color: var(--noir); position: relative; }
     .sale .btn-primary:hover { background: var(--cream); }
 
     /* Brands strip */
     .brands {
-      padding: 5rem 0 4rem; border-top: 1px solid rgba(26, 24, 22, 0.08);
+      padding: 5rem 0 4rem;
+      border-top: 1px solid rgba(26, 24, 22, 0.08);
     }
     .brands .eyebrow-c { text-align: center; margin-bottom: 2.5rem; color: var(--ink-soft); }
     .brand-row {
@@ -308,9 +360,81 @@
       font-family: "DM Sans", sans-serif; font-size: 0.92rem;
     }
 
+    /* Special order section */
+    .special {
+      padding: 6rem 0;
+      border-top: 1px solid rgba(26, 24, 22, 0.08);
+    }
+    .special-card {
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 4rem; align-items: stretch;
+      background: var(--cream-warm);
+      padding: clamp(2.4rem, 4vw, 4rem);
+      position: relative; overflow: hidden;
+    }
+    .special-text .eyebrow { color: var(--ink-soft); margin-bottom: 1rem; }
+    .special-text h2 {
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      margin-bottom: 1.4rem;
+    }
+    .special-text h2 .italic { font-style: italic; }
+    .special-text p {
+      max-width: 480px; color: var(--ink-soft);
+      margin-bottom: 2.2rem; font-size: 1rem;
+    }
+    .special-cta-row {
+      display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap;
+    }
+    .ig-btn {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      padding: 1rem 1.8rem;
+      background: var(--ink); color: var(--cream);
+      font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+      transition: transform 0.18s, background 0.2s;
+    }
+    [dir="rtl"] .ig-btn { letter-spacing: 0.06em; font-size: 0.88rem; }
+    .ig-btn:hover {
+      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      transform: translateY(-1px);
+    }
+    .ig-btn svg {
+      width: 18px; height: 18px; stroke: currentColor; fill: none;
+      stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .special-handle {
+      font-size: 0.88rem; color: var(--ink-soft);
+      direction: ltr; unicode-bidi: isolate;
+    }
+    .special-art {
+      background: var(--ink); color: var(--cream);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 2rem; min-height: 260px; position: relative;
+    }
+    .special-art-mark {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 6vw, 5rem); line-height: 1;
+      font-style: italic; color: var(--gold);
+    }
+    .special-art-meta {
+      display: flex; justify-content: space-between; gap: 1rem;
+      align-items: end; flex-wrap: wrap;
+    }
+    .special-art-meta .label {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      opacity: 0.6;
+    }
+    [dir="rtl"] .special-art-meta .label { letter-spacing: 0.08em; }
+    .special-art-meta .ig-pill {
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.4rem 0.7rem; border: 1px solid rgba(250, 249, 247, 0.3);
+      direction: ltr; unicode-bidi: isolate;
+    }
+
     /* Story section */
     .story {
-      padding: 7rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+      padding: 7rem 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
     }
     .story-art {
       aspect-ratio: 1; background: var(--cream-warm);
@@ -318,13 +442,14 @@
       overflow: hidden; position: relative;
     }
     .story-art .label {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.95; text-align: center;
-      transform: rotate(-4deg);
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.95;
+      text-align: center; transform: rotate(-4deg);
     }
     .story-art .label em { font-style: italic; color: var(--tan); }
     .story-art::after {
-      content: ''; position: absolute; bottom: 14%; right: 10%;
+      content: ''; position: absolute; bottom: 14%;
+      inset-inline-end: 10%;
       width: 16%; aspect-ratio: 1; background: var(--noir); border-radius: 50%;
     }
     .story h2 { font-size: clamp(2.5rem, 5vw, 4.2rem); }
@@ -334,15 +459,11 @@
       font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase;
       padding-bottom: 0.3rem; border-bottom: 1px solid var(--ink);
     }
+    [dir="rtl"] .story-link { letter-spacing: 0.08em; font-size: 0.84rem; }
 
     /* Newsletter */
-    .newsletter {
-      padding: 6rem 0; background: var(--cream-warm);
-      text-align: center;
-    }
-    .newsletter h3 {
-      font-size: clamp(2.2rem, 4.5vw, 3.6rem); margin-bottom: 0.6rem;
-    }
+    .newsletter { padding: 6rem 0; background: var(--cream-warm); text-align: center; }
+    .newsletter h3 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); margin-bottom: 0.6rem; }
     .newsletter p { color: var(--ink-soft); max-width: 480px; margin: 0 auto 2rem; }
     .newsletter form {
       display: flex; gap: 0.4rem; max-width: 500px; margin: 0 auto;
@@ -358,6 +479,7 @@
       padding: 1rem 1.8rem; background: var(--ink); color: var(--cream);
       font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase;
     }
+    [dir="rtl"] .newsletter button { letter-spacing: 0.08em; font-size: 0.84rem; }
     .newsletter button:hover { background: var(--charcoal); }
 
     /* Footer */
@@ -366,20 +488,26 @@
       padding: 5rem 0 2rem;
     }
     .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
-      padding-bottom: 4rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; padding-bottom: 4rem;
     }
     .footer-brand {
-      font-family: "DM Serif Display", serif; font-size: 2.4rem;
-      letter-spacing: 0.22em; margin-bottom: 1rem;
+      font-family: "DM Serif Display", serif;
+      font-size: 2.4rem; letter-spacing: 0.22em; margin-bottom: 1rem;
     }
     .footer-grid h4 {
-      font-family: "DM Sans", sans-serif; font-size: 0.74rem;
-      letter-spacing: 0.22em; text-transform: uppercase;
+      font-family: var(--font-body);
+      font-size: 0.74rem; letter-spacing: 0.22em; text-transform: uppercase;
       margin-bottom: 1.3rem; color: rgba(250, 249, 247, 0.55);
     }
-    .footer-grid ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
-    .footer-grid a { font-size: 0.92rem; opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+    [dir="rtl"] .footer-grid h4 { letter-spacing: 0.1em; font-size: 0.85rem; }
+    .footer-grid ul {
+      list-style: none; display: flex; flex-direction: column; gap: 0.65rem;
+    }
+    .footer-grid a {
+      font-size: 0.92rem; opacity: 0.85;
+      transition: opacity 0.2s, color 0.2s;
+    }
     .footer-grid a:hover { opacity: 1; color: var(--gold); }
     .footer-bottom {
       display: flex; justify-content: space-between; align-items: center;
@@ -387,11 +515,16 @@
       font-size: 0.82rem; opacity: 0.7;
     }
     .socials { display: flex; gap: 1.4rem; }
-    .socials a { font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; }
+    .socials a {
+      font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    [dir="rtl"] .socials a { letter-spacing: 0.08em; font-size: 0.84rem; }
 
     /* Responsive */
     @media (max-width: 1080px) {
       .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .special-card { grid-template-columns: 1fr; gap: 2rem; }
+      .special-art { min-height: 200px; }
     }
     @media (max-width: 860px) {
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
@@ -411,6 +544,7 @@
       .newsletter form { flex-direction: column; }
       .hero { padding: 4.5rem 0 3rem; }
       .brand-mark { font-size: 1.2rem; }
+      .lang-toggle { padding-inline-start: 0.4rem; }
     }
   </style>
 </head>
@@ -418,15 +552,15 @@
 
   <!-- Announcement marquee -->
   <div class="announce" aria-label="Announcements">
-    <div class="announce-track">
-      <span>Free shipping over $150</span>
-      <span>30-day returns</span>
-      <span>New season — 2026 drop now live</span>
-      <span>Worldwide delivery</span>
-      <span>Free shipping over $150</span>
-      <span>30-day returns</span>
-      <span>New season — 2026 drop now live</span>
-      <span>Worldwide delivery</span>
+    <div class="announce-track" id="announceTrack">
+      <span data-i18n="announce_1">משלוח חינם בקנייה מעל ₪500</span>
+      <span data-i18n="announce_2">החזרה תוך 30 יום</span>
+      <span data-i18n="announce_3">קולקציית 2026 — עכשיו באתר</span>
+      <span data-i18n="announce_4">משלוחים לכל העולם</span>
+      <span data-i18n="announce_1">משלוח חינם בקנייה מעל ₪500</span>
+      <span data-i18n="announce_2">החזרה תוך 30 יום</span>
+      <span data-i18n="announce_3">קולקציית 2026 — עכשיו באתר</span>
+      <span data-i18n="announce_4">משלוחים לכל העולם</span>
     </div>
   </div>
 
@@ -434,334 +568,374 @@
   <header class="site-header">
     <div class="container header-inner">
       <nav class="nav-left">
-        <a href="#shop" class="nav-link active">Shop</a>
-        <a href="#new" class="nav-link">New In</a>
-        <a href="#sale" class="nav-link">Sale</a>
-        <a href="#about" class="nav-link">About</a>
+        <a href="#shop" class="nav-link active" data-i18n="nav_shop">חנות</a>
+        <a href="#shop" class="nav-link" data-i18n="nav_new">חדש</a>
+        <a href="#sale" class="nav-link" data-i18n="nav_sale">סייל</a>
+        <a href="#about" class="nav-link" data-i18n="nav_about">אודות</a>
       </nav>
       <a href="#home" class="brand-mark">BIZZARE</a>
       <div class="nav-right">
         <button class="icon-btn" aria-label="Search">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-          <span>Search</span>
+          <span data-i18n="nav_search">חיפוש</span>
         </button>
         <button class="icon-btn" aria-label="Bag">
           <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
-          <span>Bag</span>
+          <span data-i18n="nav_bag">סל</span>
           <span class="bag-count">0</span>
         </button>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button data-lang="he">עב</button>
+          <span class="sep">/</span>
+          <button data-lang="en">EN</button>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- Hero -->
   <section class="hero container" id="home">
-    <p class="eyebrow new-season">New season — 2026</p>
-    <h1>Worn with <span class="italic">intention.</span></h1>
-    <p class="lede">We don't do normal — we do <strong>BIZZARE</strong>.</p>
+    <p class="eyebrow new-season" data-i18n="hero_eyebrow">עונה חדשה — 2026</p>
+    <h1>
+      <span data-i18n="hero_h1_a">נלבש מתוך</span>
+      <span class="italic" data-i18n="hero_h1_b">כוונה.</span>
+    </h1>
+    <p class="lede">
+      <span data-i18n="hero_lede">אנחנו לא רגילים — אנחנו</span>
+      <strong>BIZZARE</strong>.
+    </p>
     <div class="cta-row">
-      <a href="#shop" class="btn-primary">Shop the edit</a>
-      <a href="#about" class="btn-ghost">Our story</a>
+      <a href="#shop" class="btn-primary" data-i18n="hero_cta_shop">לאוסף</a>
+      <a href="#about" class="btn-ghost" data-i18n="hero_cta_story">הסיפור שלנו</a>
     </div>
-    <div class="scroll-cue">Scroll</div>
+    <div class="scroll-cue" data-i18n="scroll">גלילה</div>
   </section>
 
-  <!-- Category strip -->
+  <!-- Categories -->
   <section class="categories container">
-    <a href="#shop" class="cat-grid" style="text-decoration: none;">
-      <div class="cat-card" data-cat="tops">
-        <span class="meta">01 / Tops</span>
+    <div class="cat-grid">
+      <a href="#shop" class="cat-card" data-cat="tops">
+        <span class="meta" data-i18n="cat_meta_1">01 / חולצות</span>
         <div>
-          <div class="label">Tops &amp;<br>Shirts</div>
-          <span class="arrow">→</span>
+          <div class="label" data-i18n="cat_label_1">חולצות<br>וטופים</div>
+          <span class="arrow" data-i18n="arrow">←</span>
         </div>
-      </div>
-      <div class="cat-card" data-cat="bottoms">
-        <span class="meta">02 / Bottoms</span>
+      </a>
+      <a href="#shop" class="cat-card" data-cat="bottoms">
+        <span class="meta" data-i18n="cat_meta_2">02 / מכנסיים</span>
         <div>
-          <div class="label">Trousers<br>&amp; Denim</div>
-          <span class="arrow">→</span>
+          <div class="label" data-i18n="cat_label_2">מכנסיים<br>וג׳ינסים</div>
+          <span class="arrow" data-i18n="arrow">←</span>
         </div>
-      </div>
-      <div class="cat-card" data-cat="outerwear">
-        <span class="meta">03 / Layers</span>
+      </a>
+      <a href="#shop" class="cat-card" data-cat="outerwear">
+        <span class="meta" data-i18n="cat_meta_3">03 / שכבות</span>
         <div>
-          <div class="label">Outerwear</div>
-          <span class="arrow">→</span>
+          <div class="label" data-i18n="cat_label_3">מעילים</div>
+          <span class="arrow" data-i18n="arrow">←</span>
         </div>
-      </div>
-      <div class="cat-card" data-cat="accessories">
-        <span class="meta">04 / Finishing</span>
+      </a>
+      <a href="#shop" class="cat-card" data-cat="accessories">
+        <span class="meta" data-i18n="cat_meta_4">04 / השלמות</span>
         <div>
-          <div class="label">Accessories</div>
-          <span class="arrow">→</span>
+          <div class="label" data-i18n="cat_label_4">אקססוריז</div>
+          <span class="arrow" data-i18n="arrow">←</span>
         </div>
-      </div>
-      <div class="cat-card" data-cat="sale">
-        <span class="meta">★ Sale</span>
+      </a>
+      <a href="#sale" class="cat-card" data-cat="sale">
+        <span class="meta" data-i18n="cat_meta_sale">★ סייל</span>
         <div>
-          <div class="label">Up to 60% off</div>
-          <span class="arrow">→</span>
+          <div class="label" data-i18n="cat_label_sale">עד 60% הנחה</div>
+          <span class="arrow" data-i18n="arrow">←</span>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </section>
 
-  <!-- The edit -->
+  <!-- The Edit -->
   <section class="container" id="shop">
     <div class="section-head">
       <div>
-        <h2>The <span class="italic">edit.</span></h2>
+        <h2>
+          <span data-i18n="edit_title_a">המבחר</span>
+          <span class="italic" data-i18n="edit_title_b">שלנו.</span>
+        </h2>
       </div>
-      <p class="sub">A tight rotation of pieces we'd actually wear. Refreshed weekly with new arrivals from the brands that matter.</p>
+      <p class="sub" data-i18n="edit_sub">רוטציה מצומצמת של פריטים שאנחנו באמת היינו לובשים. מתעדכן שבועית בהגעות חדשות מהמותגים שחשובים.</p>
     </div>
     <div class="filter-row">
-      <button class="pill active">All</button>
-      <button class="pill">Tops</button>
-      <button class="pill">Bottoms</button>
-      <button class="pill">Outerwear</button>
-      <button class="pill">Accessories</button>
+      <button class="pill active" data-i18n="pill_all">הכל</button>
+      <button class="pill" data-i18n="pill_tops">חולצות</button>
+      <button class="pill" data-i18n="pill_bottoms">מכנסיים</button>
+      <button class="pill" data-i18n="pill_outerwear">מעילים</button>
+      <button class="pill" data-i18n="pill_accessories">אקססוריז</button>
     </div>
 
     <div class="product-grid">
-
       <!-- 1 -->
       <a href="#" class="product">
         <div class="product-card pc-1">
-          <span class="badge new">New</span>
+          <span class="badge new" data-i18n="badge_new">חדש</span>
           <span class="pc-mark">SI</span>
-          <span class="pc-glyph">crewneck</span>
+          <span class="pc-glyph" data-i18n="p1_glyph">סוודר</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#0E0D0C"></span>
             <span class="swatch" style="background:#5C5249"></span>
             <span class="swatch" style="background:#EFE8DA"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Stone Island Crewneck<span class="desc">Brushed cotton fleece · Black</span></div>
-          <div class="price">$245</div>
+          <div class="name">
+            <span data-i18n="p1_name">Stone Island Crewneck</span>
+            <span class="desc" data-i18n="p1_desc">פליז כותנה מסורק · שחור</span>
+          </div>
+          <div class="price">₪890</div>
         </div>
       </a>
-
       <!-- 2 -->
       <a href="#" class="product">
         <div class="product-card pc-4">
           <span class="pc-mark">CW</span>
-          <span class="pc-glyph">Detroit</span>
+          <span class="pc-glyph" data-i18n="p2_glyph">ז׳קט</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#8A7C63"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Carhartt WIP Detroit Jacket<span class="desc">Hamilton brown · Aged canvas</span></div>
-          <div class="price">$320</div>
+          <div class="name">
+            <span data-i18n="p2_name">Carhartt WIP Detroit Jacket</span>
+            <span class="desc" data-i18n="p2_desc">חום המילטון · קנבס מבוגר</span>
+          </div>
+          <div class="price">₪1,190</div>
         </div>
       </a>
-
       <!-- 3 -->
       <a href="#" class="product">
         <div class="product-card pc-2">
-          <span class="badge lowstock">Low stock</span>
+          <span class="badge lowstock" data-i18n="badge_lowstock">מלאי נמוך</span>
           <span class="pc-mark">AS</span>
-          <span class="pc-glyph">trouser</span>
+          <span class="pc-glyph" data-i18n="p3_glyph">מכנס</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#4A453F"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
             <span class="swatch" style="background:#C8BAAB"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Acne Studios Wool Trousers<span class="desc">Tailored straight · Charcoal</span></div>
-          <div class="price">$480</div>
+          <div class="name">
+            <span data-i18n="p3_name">Acne Studios Wool Trousers</span>
+            <span class="desc" data-i18n="p3_desc">גזרה ישרה · פחם</span>
+          </div>
+          <div class="price">₪1,790</div>
         </div>
       </a>
-
       <!-- 4 -->
       <a href="#" class="product">
         <div class="product-card pc-9">
           <span class="pc-mark">MM</span>
-          <span class="pc-glyph">replica</span>
+          <span class="pc-glyph" data-i18n="p4_glyph">חולצה</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#ECE6DB"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Margiela Replica Tee<span class="desc">Heavyweight cotton · Off-white</span></div>
-          <div class="price">$180</div>
+          <div class="name">
+            <span data-i18n="p4_name">Margiela Replica Tee</span>
+            <span class="desc" data-i18n="p4_desc">כותנה כבדה · שמנת</span>
+          </div>
+          <div class="price">₪690</div>
         </div>
       </a>
-
       <!-- 5 -->
       <a href="#" class="product">
         <div class="product-card pc-5">
           <span class="badge sale">−30%</span>
           <span class="pc-mark">PT</span>
-          <span class="pc-glyph">snap-T</span>
+          <span class="pc-glyph" data-i18n="p5_glyph">פליז</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#9D9183"></span>
             <span class="swatch" style="background:#322C26"></span>
             <span class="swatch" style="background:#B6A189"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Patagonia Synchilla Snap-T<span class="desc">Recycled fleece · Stone grey</span></div>
-          <div class="price"><span class="strike">$215</span><span class="now">$150</span></div>
+          <div class="name">
+            <span data-i18n="p5_name">Patagonia Synchilla Snap-T</span>
+            <span class="desc" data-i18n="p5_desc">פליז ממוחזר · אפור אבן</span>
+          </div>
+          <div class="price"><span class="strike">₪790</span><span class="now">₪550</span></div>
         </div>
       </a>
-
       <!-- 6 -->
       <a href="#" class="product">
         <div class="product-card pc-7">
-          <span class="badge new">New</span>
+          <span class="badge new" data-i18n="badge_new">חדש</span>
           <span class="pc-mark">OL</span>
-          <span class="pc-glyph">box shirt</span>
+          <span class="pc-glyph" data-i18n="p6_glyph">אובר-שירט</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#D9C9B4"></span>
             <span class="swatch" style="background:#5C5249"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Our Legacy Box Shirt<span class="desc">Garment-dyed poplin · Bone</span></div>
-          <div class="price">$295</div>
+          <div class="name">
+            <span data-i18n="p6_name">Our Legacy Box Shirt</span>
+            <span class="desc" data-i18n="p6_desc">פופלין צבוע · עצם</span>
+          </div>
+          <div class="price">₪1,090</div>
         </div>
       </a>
-
       <!-- 7 -->
       <a href="#" class="product">
         <div class="product-card pc-8">
           <span class="pc-mark">SI</span>
-          <span class="pc-glyph">cargo</span>
+          <span class="pc-glyph" data-i18n="p7_glyph">קרגו</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#322C26"></span>
             <span class="swatch" style="background:#5C5249"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Stone Island Cargo Pant<span class="desc">Garment-dyed · Olive drab</span></div>
-          <div class="price">$380</div>
+          <div class="name">
+            <span data-i18n="p7_name">Stone Island Cargo Pant</span>
+            <span class="desc" data-i18n="p7_desc">צבוע פוסט-תפירה · זית</span>
+          </div>
+          <div class="price">₪1,390</div>
         </div>
       </a>
-
       <!-- 8 -->
       <a href="#" class="product">
         <div class="product-card pc-6">
-          <span class="badge new">New</span>
+          <span class="badge new" data-i18n="badge_new">חדש</span>
           <span class="pc-mark">CW</span>
-          <span class="pc-glyph">single knee</span>
+          <span class="pc-glyph" data-i18n="p8_glyph">מכנסיים</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#0A0B0D"></span>
             <span class="swatch" style="background:#322C26"></span>
             <span class="swatch" style="background:#9D9183"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Carhartt Single Knee Pant<span class="desc">12 oz duck canvas · Black</span></div>
-          <div class="price">$145</div>
+          <div class="name">
+            <span data-i18n="p8_name">Carhartt Single Knee Pant</span>
+            <span class="desc" data-i18n="p8_desc">קנבס דאק 12oz · שחור</span>
+          </div>
+          <div class="price">₪520</div>
         </div>
       </a>
-
       <!-- 9 -->
       <a href="#" class="product">
         <div class="product-card pc-3">
           <span class="pc-mark">AS</span>
-          <span class="pc-glyph">cardigan</span>
+          <span class="pc-glyph" data-i18n="p9_glyph">קרדיגן</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#EFE8DA"></span>
             <span class="swatch" style="background:#5C5249"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Acne Studios Cardigan<span class="desc">Lambswool blend · Cream</span></div>
-          <div class="price">$560</div>
+          <div class="name">
+            <span data-i18n="p9_name">Acne Studios Cardigan</span>
+            <span class="desc" data-i18n="p9_desc">תערובת צמר כבש · שמנת</span>
+          </div>
+          <div class="price">₪2,090</div>
         </div>
       </a>
-
       <!-- 10 -->
       <a href="#" class="product">
         <div class="product-card pc-10">
           <span class="pc-mark">MM</span>
-          <span class="pc-glyph">5-pocket</span>
+          <span class="pc-glyph" data-i18n="p10_glyph">ג׳ינס</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#14110F"></span>
             <span class="swatch" style="background:#322C26"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Margiela 5-Pocket Pant<span class="desc">Selvedge denim · Indigo</span></div>
-          <div class="price">$390</div>
+          <div class="name">
+            <span data-i18n="p10_name">Margiela 5-Pocket Pant</span>
+            <span class="desc" data-i18n="p10_desc">ג׳ינס סלוודג׳ · אינדיגו</span>
+          </div>
+          <div class="price">₪1,450</div>
         </div>
       </a>
-
       <!-- 11 -->
       <a href="#" class="product">
         <div class="product-card pc-11">
           <span class="pc-mark">SI</span>
-          <span class="pc-glyph">beanie</span>
+          <span class="pc-glyph" data-i18n="p11_glyph">כובע</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#918371"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
             <span class="swatch" style="background:#9D9183"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Stone Island Beanie<span class="desc">Ribbed wool · Navy</span></div>
-          <div class="price">$95</div>
+          <div class="name">
+            <span data-i18n="p11_name">Stone Island Beanie</span>
+            <span class="desc" data-i18n="p11_desc">צמר מצולע · נייבי</span>
+          </div>
+          <div class="price">₪350</div>
         </div>
       </a>
-
       <!-- 12 -->
       <a href="#" class="product">
         <div class="product-card pc-12">
           <span class="badge sale">−45%</span>
           <span class="pc-mark">PT</span>
-          <span class="pc-glyph">better sweater</span>
+          <span class="pc-glyph" data-i18n="p12_glyph">סווטשירט</span>
           <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#2A2218"></span>
             <span class="swatch" style="background:#5C5249"></span>
           </div>
-          <span class="quick">Quick view</span>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
-          <div class="name">Patagonia Better Sweater<span class="desc">Knit fleece · Forest</span></div>
-          <div class="price"><span class="strike">$159</span><span class="now">$87</span></div>
+          <div class="name">
+            <span data-i18n="p12_name">Patagonia Better Sweater</span>
+            <span class="desc" data-i18n="p12_desc">פליז סרוג · יער</span>
+          </div>
+          <div class="price"><span class="strike">₪590</span><span class="now">₪320</span></div>
         </div>
       </a>
-
     </div>
 
     <div class="view-all-row">
-      <a href="#" class="btn-ghost">View all 47 pieces →</a>
+      <a href="#" class="btn-ghost" data-i18n="view_all">לכל 47 הפריטים ←</a>
     </div>
   </section>
 
-  <!-- Sale section -->
+  <!-- Sale -->
   <section class="sale" id="sale">
     <div class="container">
-      <span class="pill-tag">Limited time</span>
-      <h2>Don't sleep on this.<br><span class="gold">60% off.</span></h2>
-      <p>Last-call markdowns from the autumn drop. When they're gone, they're gone.</p>
-      <a href="#" class="btn-primary">Shop sale</a>
+      <span class="pill-tag" data-i18n="sale_pill">זמן מוגבל</span>
+      <h2>
+        <span data-i18n="sale_h2_a">אל תפספסו.</span><br>
+        <span class="gold" data-i18n="sale_h2_b">60% הנחה.</span>
+      </h2>
+      <p data-i18n="sale_p">הוזלות אחרונות מקולקציית הסתיו. אזל — אזל.</p>
+      <a href="#" class="btn-primary" data-i18n="sale_cta">לסייל</a>
     </div>
   </section>
 
-  <!-- Brands strip -->
+  <!-- Brands -->
   <section class="brands">
     <div class="container">
-      <p class="eyebrow eyebrow-c">Curated brands we carry</p>
+      <p class="eyebrow eyebrow-c" data-i18n="brands_eyebrow">המותגים שאנחנו אוהבים</p>
       <div class="brand-row">
         <span class="brand-logo italic-style">Stone Island</span>
         <span class="brand-logo bold-style">CARHARTT WIP</span>
@@ -773,27 +947,63 @@
     </div>
   </section>
 
-  <!-- Story / About -->
+  <!-- Special order -->
+  <section class="special" id="special">
+    <div class="container">
+      <div class="special-card">
+        <div class="special-text">
+          <p class="eyebrow" data-i18n="special_eyebrow">הזמנה מיוחדת</p>
+          <h2>
+            <span data-i18n="special_h2_a">מחפשים פריט</span>
+            <span class="italic" data-i18n="special_h2_b">שלא באתר?</span>
+          </h2>
+          <p data-i18n="special_p">גם פריטים שלא רואים באתר — אפשר להשיג. שלחו לנו הודעה באינסטגרם עם מה שאתם רוצים, ונחזור אליכם עם זמינות, מחיר וזמני אספקה.</p>
+          <div class="special-cta-row">
+            <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="ig-btn">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
+              <span data-i18n="special_cta">שלחו הודעה באינסטגרם</span>
+            </a>
+            <span class="special-handle">@bizarreonlinee</span>
+          </div>
+        </div>
+        <div class="special-art">
+          <span class="special-art-mark">DM <em>us.</em></span>
+          <div class="special-art-meta">
+            <span class="label" data-i18n="special_art_label">תגובה תוך 24 שעות</span>
+            <span class="ig-pill">@bizarreonlinee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
   <section class="story container" id="about">
     <div class="story-art">
       <div class="label">BIZZARE<br><em>brands</em></div>
     </div>
     <div>
-      <p class="eyebrow">Our philosophy</p>
-      <h2 style="margin-top: 0.6rem;">Different by <span class="italic">design.</span></h2>
-      <p>Bizzare was built for people who don't follow — they lead. We curate pieces from the brands that matter, bring them to you at prices that make sense, and do it all with the one rule that drives us: we don't do normal.</p>
-      <a href="#" class="story-link">Our story →</a>
+      <p class="eyebrow" data-i18n="story_eyebrow">הפילוסופיה שלנו</p>
+      <h2 style="margin-top: 0.6rem;">
+        <span data-i18n="story_h2_a">שונים מתוך</span>
+        <span class="italic" data-i18n="story_h2_b">עיצוב.</span>
+      </h2>
+      <p data-i18n="story_p">Bizzare נבנה לאנשים שלא הולכים אחרי — הם מובילים. אנחנו אוצרים פריטים מהמותגים שחשובים, מביאים אותם אליכם במחירים שעושים שכל, ועושים את זה לפי כלל אחד: אנחנו לא רגילים.</p>
+      <a href="#" class="story-link" data-i18n="story_link">הסיפור שלנו ←</a>
     </div>
   </section>
 
   <!-- Newsletter -->
   <section class="newsletter">
     <div class="container">
-      <h3>Join the <span class="italic">list.</span></h3>
-      <p>First dibs on drops. Members-only fits. Zero spam.</p>
+      <h3>
+        <span data-i18n="nl_h3_a">הצטרפו</span>
+        <span class="italic" data-i18n="nl_h3_b">לרשימה.</span>
+      </h3>
+      <p data-i18n="nl_p">הראשונים לדעת על דרופים. פריטים בלעדיים לחברים. אפס ספאם.</p>
       <form id="nlForm">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit">Sign up</button>
+        <input type="email" data-i18n-placeholder="nl_placeholder" placeholder="כתובת המייל שלכם" required>
+        <button type="submit" data-i18n="nl_cta">הרשמה</button>
       </form>
     </div>
   </section>
@@ -804,41 +1014,41 @@
       <div class="footer-grid">
         <div>
           <div class="footer-brand">BIZZARE</div>
-          <p style="opacity: 0.7; max-width: 320px;">Considered clothing for people who don't do normal. Curated drops, refined fits, real quality.</p>
+          <p style="opacity: 0.7; max-width: 320px;" data-i18n="foot_brand_p">בגדים מוקפדים לאנשים שלא רגילים. דרופים אוצריים, גזרות מדויקות, איכות אמיתית.</p>
         </div>
         <div>
-          <h4>Shop</h4>
+          <h4 data-i18n="foot_shop">חנות</h4>
           <ul>
-            <li><a href="#shop">New in</a></li>
-            <li><a href="#shop">Tops</a></li>
-            <li><a href="#shop">Bottoms</a></li>
-            <li><a href="#shop">Outerwear</a></li>
-            <li><a href="#sale">Sale</a></li>
+            <li><a href="#shop" data-i18n="foot_new">חדש</a></li>
+            <li><a href="#shop" data-i18n="foot_tops">חולצות</a></li>
+            <li><a href="#shop" data-i18n="foot_bottoms">מכנסיים</a></li>
+            <li><a href="#shop" data-i18n="foot_outer">מעילים</a></li>
+            <li><a href="#sale" data-i18n="foot_sale">סייל</a></li>
           </ul>
         </div>
         <div>
-          <h4>Help</h4>
+          <h4 data-i18n="foot_help">עזרה</h4>
           <ul>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a href="#">Size guide</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#" data-i18n="foot_shipping">משלוחים</a></li>
+            <li><a href="#" data-i18n="foot_returns">החזרות</a></li>
+            <li><a href="#" data-i18n="foot_size">מדריך מידות</a></li>
+            <li><a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" data-i18n="foot_contact">צרו קשר</a></li>
           </ul>
         </div>
         <div>
-          <h4>Studio</h4>
+          <h4 data-i18n="foot_studio">סטודיו</h4>
           <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#">Lookbook</a></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">Stockists</a></li>
+            <li><a href="#about" data-i18n="foot_about">אודות</a></li>
+            <li><a href="#" data-i18n="foot_lookbook">לוקבוק</a></li>
+            <li><a href="#" data-i18n="foot_press">פרסום</a></li>
+            <li><a href="#" data-i18n="foot_stockists">נקודות מכירה</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Bizzare Studio. All rights reserved.</span>
+        <span data-i18n="foot_copy">© 2026 Bizzare Studio. כל הזכויות שמורות.</span>
         <div class="socials">
-          <a href="#">Instagram</a>
+          <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener">Instagram</a>
           <a href="#">TikTok</a>
           <a href="#">Pinterest</a>
         </div>
@@ -847,10 +1057,192 @@
   </footer>
 
   <script>
-    // Filter pill toggle (visual only)
-    document.querySelectorAll('.filter-row .pill').forEach(p => {
-      p.addEventListener('click', () => {
-        document.querySelectorAll('.filter-row .pill').forEach(x => x.classList.remove('active'));
+    // Translations
+    var i18n = {
+      he: {
+        meta_title: 'BIZZARE — בגדים מובחרים',
+        nav_shop: 'חנות', nav_new: 'חדש', nav_sale: 'סייל', nav_about: 'אודות',
+        nav_search: 'חיפוש', nav_bag: 'סל',
+        announce_1: 'משלוח חינם בקנייה מעל ₪500',
+        announce_2: 'החזרה תוך 30 יום',
+        announce_3: 'קולקציית 2026 — עכשיו באתר',
+        announce_4: 'משלוחים לכל העולם',
+        hero_eyebrow: 'עונה חדשה — 2026',
+        hero_h1_a: 'נלבש מתוך',
+        hero_h1_b: 'כוונה.',
+        hero_lede: 'אנחנו לא רגילים — אנחנו',
+        hero_cta_shop: 'לאוסף',
+        hero_cta_story: 'הסיפור שלנו',
+        scroll: 'גלילה',
+        cat_meta_1: '01 / חולצות', cat_label_1: 'חולצות<br>וטופים',
+        cat_meta_2: '02 / מכנסיים', cat_label_2: 'מכנסיים<br>וג׳ינסים',
+        cat_meta_3: '03 / שכבות', cat_label_3: 'מעילים',
+        cat_meta_4: '04 / השלמות', cat_label_4: 'אקססוריז',
+        cat_meta_sale: '★ סייל', cat_label_sale: 'עד 60% הנחה',
+        arrow: '←',
+        edit_title_a: 'המבחר', edit_title_b: 'שלנו.',
+        edit_sub: 'רוטציה מצומצמת של פריטים שאנחנו באמת היינו לובשים. מתעדכן שבועית בהגעות חדשות מהמותגים שחשובים.',
+        pill_all: 'הכל', pill_tops: 'חולצות', pill_bottoms: 'מכנסיים',
+        pill_outerwear: 'מעילים', pill_accessories: 'אקססוריז',
+        badge_new: 'חדש', badge_lowstock: 'מלאי נמוך',
+        quick_view: 'תצוגה מהירה',
+        view_all: 'לכל 47 הפריטים ←',
+        p1_name: 'Stone Island Crewneck', p1_desc: 'פליז כותנה מסורק · שחור', p1_glyph: 'סוודר',
+        p2_name: 'Carhartt WIP Detroit Jacket', p2_desc: 'חום המילטון · קנבס מבוגר', p2_glyph: 'ז׳קט',
+        p3_name: 'Acne Studios Wool Trousers', p3_desc: 'גזרה ישרה · פחם', p3_glyph: 'מכנס',
+        p4_name: 'Margiela Replica Tee', p4_desc: 'כותנה כבדה · שמנת', p4_glyph: 'חולצה',
+        p5_name: 'Patagonia Synchilla Snap-T', p5_desc: 'פליז ממוחזר · אפור אבן', p5_glyph: 'פליז',
+        p6_name: 'Our Legacy Box Shirt', p6_desc: 'פופלין צבוע · עצם', p6_glyph: 'אובר-שירט',
+        p7_name: 'Stone Island Cargo Pant', p7_desc: 'צבוע פוסט-תפירה · זית', p7_glyph: 'קרגו',
+        p8_name: 'Carhartt Single Knee Pant', p8_desc: 'קנבס דאק 12oz · שחור', p8_glyph: 'מכנסיים',
+        p9_name: 'Acne Studios Cardigan', p9_desc: 'תערובת צמר כבש · שמנת', p9_glyph: 'קרדיגן',
+        p10_name: 'Margiela 5-Pocket Pant', p10_desc: 'ג׳ינס סלוודג׳ · אינדיגו', p10_glyph: 'ג׳ינס',
+        p11_name: 'Stone Island Beanie', p11_desc: 'צמר מצולע · נייבי', p11_glyph: 'כובע',
+        p12_name: 'Patagonia Better Sweater', p12_desc: 'פליז סרוג · יער', p12_glyph: 'סווטשירט',
+        sale_pill: 'זמן מוגבל',
+        sale_h2_a: 'אל תפספסו.', sale_h2_b: '60% הנחה.',
+        sale_p: 'הוזלות אחרונות מקולקציית הסתיו. אזל — אזל.',
+        sale_cta: 'לסייל',
+        brands_eyebrow: 'המותגים שאנחנו אוהבים',
+        special_eyebrow: 'הזמנה מיוחדת',
+        special_h2_a: 'מחפשים פריט', special_h2_b: 'שלא באתר?',
+        special_p: 'גם פריטים שלא רואים באתר — אפשר להשיג. שלחו לנו הודעה באינסטגרם עם מה שאתם רוצים, ונחזור אליכם עם זמינות, מחיר וזמני אספקה.',
+        special_cta: 'שלחו הודעה באינסטגרם',
+        special_art_label: 'תגובה תוך 24 שעות',
+        story_eyebrow: 'הפילוסופיה שלנו',
+        story_h2_a: 'שונים מתוך', story_h2_b: 'עיצוב.',
+        story_p: 'Bizzare נבנה לאנשים שלא הולכים אחרי — הם מובילים. אנחנו אוצרים פריטים מהמותגים שחשובים, מביאים אותם אליכם במחירים שעושים שכל, ועושים את זה לפי כלל אחד: אנחנו לא רגילים.',
+        story_link: 'הסיפור שלנו ←',
+        nl_h3_a: 'הצטרפו', nl_h3_b: 'לרשימה.',
+        nl_p: 'הראשונים לדעת על דרופים. פריטים בלעדיים לחברים. אפס ספאם.',
+        nl_placeholder: 'כתובת המייל שלכם',
+        nl_cta: 'הרשמה',
+        nl_thanks: 'תודה — אתם רשומים',
+        foot_brand_p: 'בגדים מוקפדים לאנשים שלא רגילים. דרופים אוצריים, גזרות מדויקות, איכות אמיתית.',
+        foot_shop: 'חנות', foot_help: 'עזרה', foot_studio: 'סטודיו',
+        foot_new: 'חדש', foot_tops: 'חולצות', foot_bottoms: 'מכנסיים',
+        foot_outer: 'מעילים', foot_sale: 'סייל',
+        foot_shipping: 'משלוחים', foot_returns: 'החזרות',
+        foot_size: 'מדריך מידות', foot_contact: 'צרו קשר',
+        foot_about: 'אודות', foot_lookbook: 'לוקבוק',
+        foot_press: 'פרסום', foot_stockists: 'נקודות מכירה',
+        foot_copy: '© 2026 Bizzare Studio. כל הזכויות שמורות.',
+      },
+      en: {
+        meta_title: 'BIZZARE — Considered Clothing',
+        nav_shop: 'Shop', nav_new: 'New In', nav_sale: 'Sale', nav_about: 'About',
+        nav_search: 'Search', nav_bag: 'Bag',
+        announce_1: 'Free shipping over ₪500',
+        announce_2: '30-day returns',
+        announce_3: 'New season — 2026 drop now live',
+        announce_4: 'Worldwide delivery',
+        hero_eyebrow: 'New season — 2026',
+        hero_h1_a: 'Worn with',
+        hero_h1_b: 'intention.',
+        hero_lede: "We don't do normal — we do",
+        hero_cta_shop: 'Shop the edit',
+        hero_cta_story: 'Our story',
+        scroll: 'Scroll',
+        cat_meta_1: '01 / Tops', cat_label_1: 'Tops &amp;<br>Shirts',
+        cat_meta_2: '02 / Bottoms', cat_label_2: 'Trousers<br>&amp; Denim',
+        cat_meta_3: '03 / Layers', cat_label_3: 'Outerwear',
+        cat_meta_4: '04 / Finishing', cat_label_4: 'Accessories',
+        cat_meta_sale: '★ Sale', cat_label_sale: 'Up to 60% off',
+        arrow: '→',
+        edit_title_a: 'The', edit_title_b: 'edit.',
+        edit_sub: "A tight rotation of pieces we'd actually wear. Refreshed weekly with new arrivals from the brands that matter.",
+        pill_all: 'All', pill_tops: 'Tops', pill_bottoms: 'Bottoms',
+        pill_outerwear: 'Outerwear', pill_accessories: 'Accessories',
+        badge_new: 'New', badge_lowstock: 'Low stock',
+        quick_view: 'Quick view',
+        view_all: 'View all 47 pieces →',
+        p1_name: 'Stone Island Crewneck', p1_desc: 'Brushed cotton fleece · Black', p1_glyph: 'crewneck',
+        p2_name: 'Carhartt WIP Detroit Jacket', p2_desc: 'Hamilton brown · Aged canvas', p2_glyph: 'Detroit',
+        p3_name: 'Acne Studios Wool Trousers', p3_desc: 'Tailored straight · Charcoal', p3_glyph: 'trouser',
+        p4_name: 'Margiela Replica Tee', p4_desc: 'Heavyweight cotton · Off-white', p4_glyph: 'replica',
+        p5_name: 'Patagonia Synchilla Snap-T', p5_desc: 'Recycled fleece · Stone grey', p5_glyph: 'snap-T',
+        p6_name: 'Our Legacy Box Shirt', p6_desc: 'Garment-dyed poplin · Bone', p6_glyph: 'box shirt',
+        p7_name: 'Stone Island Cargo Pant', p7_desc: 'Garment-dyed · Olive drab', p7_glyph: 'cargo',
+        p8_name: 'Carhartt Single Knee Pant', p8_desc: '12 oz duck canvas · Black', p8_glyph: 'single knee',
+        p9_name: 'Acne Studios Cardigan', p9_desc: 'Lambswool blend · Cream', p9_glyph: 'cardigan',
+        p10_name: 'Margiela 5-Pocket Pant', p10_desc: 'Selvedge denim · Indigo', p10_glyph: '5-pocket',
+        p11_name: 'Stone Island Beanie', p11_desc: 'Ribbed wool · Navy', p11_glyph: 'beanie',
+        p12_name: 'Patagonia Better Sweater', p12_desc: 'Knit fleece · Forest', p12_glyph: 'better sweater',
+        sale_pill: 'Limited time',
+        sale_h2_a: "Don't sleep on this.", sale_h2_b: '60% off.',
+        sale_p: "Last-call markdowns from the autumn drop. When they're gone, they're gone.",
+        sale_cta: 'Shop sale',
+        brands_eyebrow: 'Curated brands we carry',
+        special_eyebrow: 'Special order',
+        special_h2_a: "Want something", special_h2_b: 'not listed?',
+        special_p: "After a specific piece we don't carry yet? DM us on Instagram with what you want and we'll come back to you with availability, pricing, and lead time.",
+        special_cta: 'Message us on Instagram',
+        special_art_label: 'Reply within 24 hours',
+        story_eyebrow: 'Our philosophy',
+        story_h2_a: 'Different by', story_h2_b: 'design.',
+        story_p: "Bizzare was built for people who don't follow — they lead. We curate pieces from the brands that matter, bring them to you at prices that make sense, and do it all with the one rule that drives us: we don't do normal.",
+        story_link: 'Our story →',
+        nl_h3_a: 'Join the', nl_h3_b: 'list.',
+        nl_p: 'First dibs on drops. Members-only fits. Zero spam.',
+        nl_placeholder: 'Your email address',
+        nl_cta: 'Sign up',
+        nl_thanks: "Thanks — you're in",
+        foot_brand_p: "Considered clothing for people who don't do normal. Curated drops, refined fits, real quality.",
+        foot_shop: 'Shop', foot_help: 'Help', foot_studio: 'Studio',
+        foot_new: 'New in', foot_tops: 'Tops', foot_bottoms: 'Bottoms',
+        foot_outer: 'Outerwear', foot_sale: 'Sale',
+        foot_shipping: 'Shipping', foot_returns: 'Returns',
+        foot_size: 'Size guide', foot_contact: 'Contact',
+        foot_about: 'About', foot_lookbook: 'Lookbook',
+        foot_press: 'Press', foot_stockists: 'Stockists',
+        foot_copy: '© 2026 Bizzare Studio. All rights reserved.',
+      }
+    };
+
+    function applyLang(lang) {
+      if (!i18n[lang]) lang = 'he';
+      var dict = i18n[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+      // Translate text nodes
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      // Translate placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key] !== undefined) el.placeholder = dict[key];
+      });
+      // Title
+      if (dict.meta_title) document.title = dict.meta_title;
+      // Toggle UI state
+      document.querySelectorAll('.lang-toggle button').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+      // Persist
+      try { localStorage.setItem('bz-lang', lang); } catch (e) {}
+    }
+
+    // Init: persisted preference, default Hebrew
+    var initialLang = 'he';
+    try {
+      var saved = localStorage.getItem('bz-lang');
+      if (saved === 'en' || saved === 'he') initialLang = saved;
+    } catch (e) {}
+    applyLang(initialLang);
+
+    // Toggle handlers
+    document.querySelectorAll('.lang-toggle button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        applyLang(b.getAttribute('data-lang'));
+      });
+    });
+
+    // Filter pills (visual only)
+    document.querySelectorAll('.filter-row .pill').forEach(function(p) {
+      p.addEventListener('click', function() {
+        document.querySelectorAll('.filter-row .pill').forEach(function(x) { x.classList.remove('active'); });
         p.classList.add('active');
       });
     });
@@ -861,7 +1253,8 @@
       nlForm.addEventListener('submit', function(e) {
         e.preventDefault();
         var btn = nlForm.querySelector('button');
-        btn.textContent = 'Thanks — you’re in';
+        var lang = document.documentElement.lang === 'en' ? 'en' : 'he';
+        btn.textContent = i18n[lang].nl_thanks;
         btn.disabled = true;
         nlForm.querySelector('input').value = '';
       });
