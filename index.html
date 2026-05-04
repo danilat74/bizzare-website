@@ -212,7 +212,7 @@
 
     /* Product grid */
     .product-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem 1.1rem;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem 1.1rem;
     }
     .product { display: flex; flex-direction: column; gap: 0.85rem; }
     .product-card {
@@ -221,28 +221,15 @@
       display: flex; align-items: flex-end; padding: 1.1rem;
       transition: transform 0.3s ease;
       isolation: isolate;
+      background: var(--cream-warm);
     }
     .product:hover .product-card { transform: translateY(-4px); }
-    .product-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 60%);
-      pointer-events: none; z-index: 1;
+    .product-card .product-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
-    .product-card .pc-mark {
-      position: absolute; top: 1.1rem;
-      inset-inline-end: 1.1rem;
-      font-family: "DM Serif Display", "Frank Ruhl Libre", serif;
-      font-size: 1.4rem; opacity: 0.4; line-height: 1;
-    }
-    .product-card .pc-glyph {
-      position: absolute; left: 50%; top: 48%; transform: translate(-50%, -50%);
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4vw, 3.6rem);
-      font-style: italic; line-height: 1;
-      opacity: 0.32; text-align: center; z-index: 1;
-      letter-spacing: -0.02em;
-    }
-    [dir="rtl"] .product-card .pc-glyph { font-size: clamp(2rem, 3.4vw, 3rem); }
     .product-card .swatch-row {
       position: relative; z-index: 2;
       display: flex; gap: 0.4rem;
@@ -276,37 +263,34 @@
     .product-card .badge.sale { background: var(--gold); color: var(--noir); }
     .product-card .badge.new { background: var(--cream); color: var(--noir); }
     .product-card .badge.lowstock { background: var(--noir); color: var(--cream); }
-
-    .pc-1 { background: linear-gradient(160deg, #2A2724 0%, #0E0D0C 100%); color: var(--cream); }
-    .pc-2 { background: linear-gradient(160deg, #6F6962 0%, #4A453F 100%); color: var(--cream); }
-    .pc-3 { background: linear-gradient(160deg, #EFE8DA 0%, #DBD1BC 100%); color: var(--ink); }
-    .pc-4 { background: linear-gradient(160deg, #B4A689 0%, #8A7C63 100%); color: var(--cream); }
-    .pc-5 { background: linear-gradient(160deg, #C8BAAB 0%, #9D9183 100%); color: var(--ink); }
-    .pc-6 { background: linear-gradient(160deg, #1F2024 0%, #0A0B0D 100%); color: var(--cream); }
-    .pc-7 { background: linear-gradient(160deg, #D9C9B4 0%, #B6A189 100%); color: var(--ink); }
-    .pc-8 { background: linear-gradient(160deg, #5C5249 0%, #322C26 100%); color: var(--cream); }
-    .pc-9 { background: linear-gradient(160deg, #ECE6DB 0%, #C7BEA9 100%); color: var(--ink); }
-    .pc-10 { background: linear-gradient(160deg, #34302C 0%, #14110F 100%); color: var(--cream); }
-    .pc-11 { background: linear-gradient(160deg, #BFB29D 0%, #918371 100%); color: var(--cream); }
-    .pc-12 { background: linear-gradient(160deg, #463B30 0%, #2A2218 100%); color: var(--cream); }
+    .product-card .brand-tag {
+      position: absolute; top: 1.1rem;
+      inset-inline-end: 1.1rem; z-index: 2;
+      padding: 0.32rem 0.55rem;
+      background: rgba(250, 249, 247, 0.9);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--ink);
+      font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+    }
 
     .product .info {
       display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
     }
-    .product .info .name { font-size: 0.92rem; line-height: 1.35; }
+    .product .info .name { font-size: 0.95rem; line-height: 1.35; flex: 1; }
     .product .info .name .desc {
       display: block; color: var(--ink-soft);
-      font-size: 0.76rem; margin-top: 0.18rem;
+      font-size: 0.78rem; margin-top: 0.18rem;
     }
-    .product .info .price {
-      font-size: 0.92rem; white-space: nowrap;
-      direction: ltr; unicode-bidi: isolate;
+    .product .info .dm-link {
+      font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--tan); white-space: nowrap;
+      border-bottom: 1px solid var(--tan);
+      padding-bottom: 0.12rem;
+      transition: color 0.15s, border-color 0.15s;
     }
-    .product .info .price .strike {
-      color: var(--ink-soft); text-decoration: line-through;
-      margin-inline-end: 0.5rem; font-size: 0.8rem;
-    }
-    .product .info .price .now { color: var(--gold); font-weight: 500; }
+    [dir="rtl"] .product .info .dm-link { letter-spacing: 0.06em; font-size: 0.82rem; }
+    .product .info .dm-link:hover { color: var(--ink); border-color: var(--ink); }
 
     .view-all-row { padding: 2.6rem 0 1rem; text-align: center; }
 
@@ -622,30 +606,30 @@
         </div>
       </a>
       <a href="#shop" class="cat-card" data-cat="bottoms">
-        <span class="meta" data-i18n="cat_meta_2">02 / מכנסיים</span>
+        <span class="meta" data-i18n="cat_meta_2">02 / סטים</span>
         <div>
-          <div class="label" data-i18n="cat_label_2">מכנסיים<br>וג׳ינסים</div>
+          <div class="label" data-i18n="cat_label_2">סטים<br>מלאים</div>
           <span class="arrow" data-i18n="arrow">←</span>
         </div>
       </a>
       <a href="#shop" class="cat-card" data-cat="outerwear">
         <span class="meta" data-i18n="cat_meta_3">03 / שכבות</span>
         <div>
-          <div class="label" data-i18n="cat_label_3">מעילים</div>
+          <div class="label" data-i18n="cat_label_3">סוודרים<br>וסריגים</div>
           <span class="arrow" data-i18n="arrow">←</span>
         </div>
       </a>
       <a href="#shop" class="cat-card" data-cat="accessories">
-        <span class="meta" data-i18n="cat_meta_4">04 / השלמות</span>
+        <span class="meta" data-i18n="cat_meta_4">04 / מותגים</span>
         <div>
-          <div class="label" data-i18n="cat_label_4">אקססוריז</div>
+          <div class="label" data-i18n="cat_label_4">המותגים<br>שלנו</div>
           <span class="arrow" data-i18n="arrow">←</span>
         </div>
       </a>
-      <a href="#sale" class="cat-card" data-cat="sale">
-        <span class="meta" data-i18n="cat_meta_sale">★ סייל</span>
+      <a href="#special" class="cat-card" data-cat="sale">
+        <span class="meta" data-i18n="cat_meta_sale">★ הזמנה מיוחדת</span>
         <div>
-          <div class="label" data-i18n="cat_label_sale">עד 60% הנחה</div>
+          <div class="label" data-i18n="cat_label_sale">כל פריט שתרצו</div>
           <span class="arrow" data-i18n="arrow">←</span>
         </div>
       </a>
@@ -661,27 +645,25 @@
           <span class="italic" data-i18n="edit_title_b">שלנו.</span>
         </h2>
       </div>
-      <p class="sub" data-i18n="edit_sub">רוטציה מצומצמת של פריטים שאנחנו באמת היינו לובשים. מתעדכן שבועית בהגעות חדשות מהמותגים שחשובים.</p>
+      <p class="sub" data-i18n="edit_sub">בחירה מצומצמת של פריטים שיש לנו במלאי כעת — Stone Island ו-Fear of God Essentials. למחיר ולהזמנה — הודעה באינסטגרם.</p>
     </div>
     <div class="filter-row">
       <button class="pill active" data-i18n="pill_all">הכל</button>
-      <button class="pill" data-i18n="pill_tops">חולצות</button>
-      <button class="pill" data-i18n="pill_bottoms">מכנסיים</button>
-      <button class="pill" data-i18n="pill_outerwear">מעילים</button>
-      <button class="pill" data-i18n="pill_accessories">אקססוריז</button>
+      <button class="pill" data-i18n="pill_si">Stone Island</button>
+      <button class="pill" data-i18n="pill_fog">Essentials</button>
     </div>
 
     <div class="product-grid">
-      <!-- 1 -->
-      <a href="#" class="product">
-        <div class="product-card pc-1">
-          <span class="badge new" data-i18n="badge_new">חדש</span>
-          <span class="pc-mark">SI</span>
-          <span class="pc-glyph" data-i18n="p1_glyph">סוודר</span>
+
+      <!-- 1: Stone Island Crewneck — Black -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p1-si-crewneck-black.jpg" alt="Stone Island Crewneck — Black" loading="lazy">
+          <span class="brand-tag">Stone Island</span>
           <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#0E0D0C"></span>
-            <span class="swatch" style="background:#5C5249"></span>
+            <span class="swatch" style="background:#0E0D0C; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
             <span class="swatch" style="background:#EFE8DA"></span>
+            <span class="swatch" style="background:#5C5249"></span>
           </div>
           <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
@@ -690,232 +672,140 @@
             <span data-i18n="p1_name">Stone Island Crewneck</span>
             <span class="desc" data-i18n="p1_desc">פליז כותנה מסורק · שחור</span>
           </div>
-          <div class="price">₪890</div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
         </div>
       </a>
-      <!-- 2 -->
-      <a href="#" class="product">
-        <div class="product-card pc-4">
-          <span class="pc-mark">CW</span>
-          <span class="pc-glyph" data-i18n="p2_glyph">ז׳קט</span>
+
+      <!-- 2: Stone Island Crewneck — Cream -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p2-si-crewneck-cream.jpg" alt="Stone Island Crewneck — Cream" loading="lazy">
+          <span class="brand-tag">Stone Island</span>
           <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#8A7C63"></span>
+            <span class="swatch" style="background:#EFE8DA; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
-          </div>
-          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
-        </div>
-        <div class="info">
-          <div class="name">
-            <span data-i18n="p2_name">Carhartt WIP Detroit Jacket</span>
-            <span class="desc" data-i18n="p2_desc">חום המילטון · קנבס מבוגר</span>
-          </div>
-          <div class="price">₪1,190</div>
-        </div>
-      </a>
-      <!-- 3 -->
-      <a href="#" class="product">
-        <div class="product-card pc-2">
-          <span class="badge lowstock" data-i18n="badge_lowstock">מלאי נמוך</span>
-          <span class="pc-mark">AS</span>
-          <span class="pc-glyph" data-i18n="p3_glyph">מכנס</span>
-          <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#4A453F"></span>
-            <span class="swatch" style="background:#0E0D0C"></span>
-            <span class="swatch" style="background:#C8BAAB"></span>
-          </div>
-          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
-        </div>
-        <div class="info">
-          <div class="name">
-            <span data-i18n="p3_name">Acne Studios Wool Trousers</span>
-            <span class="desc" data-i18n="p3_desc">גזרה ישרה · פחם</span>
-          </div>
-          <div class="price">₪1,790</div>
-        </div>
-      </a>
-      <!-- 4 -->
-      <a href="#" class="product">
-        <div class="product-card pc-9">
-          <span class="pc-mark">MM</span>
-          <span class="pc-glyph" data-i18n="p4_glyph">חולצה</span>
-          <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#ECE6DB"></span>
-            <span class="swatch" style="background:#0E0D0C"></span>
-          </div>
-          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
-        </div>
-        <div class="info">
-          <div class="name">
-            <span data-i18n="p4_name">Margiela Replica Tee</span>
-            <span class="desc" data-i18n="p4_desc">כותנה כבדה · שמנת</span>
-          </div>
-          <div class="price">₪690</div>
-        </div>
-      </a>
-      <!-- 5 -->
-      <a href="#" class="product">
-        <div class="product-card pc-5">
-          <span class="badge sale">−30%</span>
-          <span class="pc-mark">PT</span>
-          <span class="pc-glyph" data-i18n="p5_glyph">פליז</span>
-          <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#9D9183"></span>
-            <span class="swatch" style="background:#322C26"></span>
-            <span class="swatch" style="background:#B6A189"></span>
-          </div>
-          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
-        </div>
-        <div class="info">
-          <div class="name">
-            <span data-i18n="p5_name">Patagonia Synchilla Snap-T</span>
-            <span class="desc" data-i18n="p5_desc">פליז ממוחזר · אפור אבן</span>
-          </div>
-          <div class="price"><span class="strike">₪790</span><span class="now">₪550</span></div>
-        </div>
-      </a>
-      <!-- 6 -->
-      <a href="#" class="product">
-        <div class="product-card pc-7">
-          <span class="badge new" data-i18n="badge_new">חדש</span>
-          <span class="pc-mark">OL</span>
-          <span class="pc-glyph" data-i18n="p6_glyph">אובר-שירט</span>
-          <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#D9C9B4"></span>
             <span class="swatch" style="background:#5C5249"></span>
           </div>
           <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
           <div class="name">
-            <span data-i18n="p6_name">Our Legacy Box Shirt</span>
-            <span class="desc" data-i18n="p6_desc">פופלין צבוע · עצם</span>
+            <span data-i18n="p2_name">Stone Island Crewneck</span>
+            <span class="desc" data-i18n="p2_desc">פליז כותנה מסורק · שמנת</span>
           </div>
-          <div class="price">₪1,090</div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
         </div>
       </a>
-      <!-- 7 -->
-      <a href="#" class="product">
-        <div class="product-card pc-8">
-          <span class="pc-mark">SI</span>
-          <span class="pc-glyph" data-i18n="p7_glyph">קרגו</span>
+
+      <!-- 3: Stone Island Crewneck — Charcoal -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p3-si-crewneck-charcoal.jpg" alt="Stone Island Crewneck — Charcoal" loading="lazy">
+          <span class="brand-tag">Stone Island</span>
           <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#322C26"></span>
-            <span class="swatch" style="background:#5C5249"></span>
+            <span class="swatch" style="background:#5C5249; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
-          </div>
-          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
-        </div>
-        <div class="info">
-          <div class="name">
-            <span data-i18n="p7_name">Stone Island Cargo Pant</span>
-            <span class="desc" data-i18n="p7_desc">צבוע פוסט-תפירה · זית</span>
-          </div>
-          <div class="price">₪1,390</div>
-        </div>
-      </a>
-      <!-- 8 -->
-      <a href="#" class="product">
-        <div class="product-card pc-6">
-          <span class="badge new" data-i18n="badge_new">חדש</span>
-          <span class="pc-mark">CW</span>
-          <span class="pc-glyph" data-i18n="p8_glyph">מכנסיים</span>
-          <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#0A0B0D"></span>
-            <span class="swatch" style="background:#322C26"></span>
-            <span class="swatch" style="background:#9D9183"></span>
-          </div>
-          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
-        </div>
-        <div class="info">
-          <div class="name">
-            <span data-i18n="p8_name">Carhartt Single Knee Pant</span>
-            <span class="desc" data-i18n="p8_desc">קנבס דאק 12oz · שחור</span>
-          </div>
-          <div class="price">₪520</div>
-        </div>
-      </a>
-      <!-- 9 -->
-      <a href="#" class="product">
-        <div class="product-card pc-3">
-          <span class="pc-mark">AS</span>
-          <span class="pc-glyph" data-i18n="p9_glyph">קרדיגן</span>
-          <div class="swatch-row" aria-hidden="true">
             <span class="swatch" style="background:#EFE8DA"></span>
-            <span class="swatch" style="background:#5C5249"></span>
           </div>
           <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
           <div class="name">
-            <span data-i18n="p9_name">Acne Studios Cardigan</span>
-            <span class="desc" data-i18n="p9_desc">תערובת צמר כבש · שמנת</span>
+            <span data-i18n="p3_name">Stone Island Crewneck</span>
+            <span class="desc" data-i18n="p3_desc">פליז כותנה מסורק · פחם</span>
           </div>
-          <div class="price">₪2,090</div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
         </div>
       </a>
-      <!-- 10 -->
-      <a href="#" class="product">
-        <div class="product-card pc-10">
-          <span class="pc-mark">MM</span>
-          <span class="pc-glyph" data-i18n="p10_glyph">ג׳ינס</span>
+
+      <!-- 4: Stone Island Knit — Charcoal -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p4-si-knit-charcoal.jpg" alt="Stone Island Knit Sweater — Charcoal" loading="lazy">
+          <span class="brand-tag">Stone Island</span>
+          <span class="badge new" data-i18n="badge_new">חדש</span>
           <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#14110F"></span>
-            <span class="swatch" style="background:#322C26"></span>
+            <span class="swatch" style="background:#5C5249; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
           </div>
           <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
           <div class="name">
-            <span data-i18n="p10_name">Margiela 5-Pocket Pant</span>
-            <span class="desc" data-i18n="p10_desc">ג׳ינס סלוודג׳ · אינדיגו</span>
+            <span data-i18n="p4_name">Stone Island Knit Sweater</span>
+            <span class="desc" data-i18n="p4_desc">סריג צמר · פחם</span>
           </div>
-          <div class="price">₪1,450</div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
         </div>
       </a>
-      <!-- 11 -->
-      <a href="#" class="product">
-        <div class="product-card pc-11">
-          <span class="pc-mark">SI</span>
-          <span class="pc-glyph" data-i18n="p11_glyph">כובע</span>
+
+      <!-- 5: Essentials Set — Black -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p5-fog-set-black.jpg" alt="Fear of God Essentials Set — Black" loading="lazy">
+          <span class="brand-tag">Fear of God</span>
           <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#918371"></span>
+            <span class="swatch" style="background:#0E0D0C; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
+            <span class="swatch" style="background:#A8A39C"></span>
+            <span class="swatch" style="background:#E8DFCE"></span>
+          </div>
+          <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
+        </div>
+        <div class="info">
+          <div class="name">
+            <span data-i18n="p5_name">Essentials Set — Black</span>
+            <span class="desc" data-i18n="p5_desc">טי + מכנס קצר · Fear of God</span>
+          </div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
+        </div>
+      </a>
+
+      <!-- 6: Essentials Set — Heather Grey -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p6-fog-set-grey.jpg" alt="Fear of God Essentials Set — Heather Grey" loading="lazy">
+          <span class="brand-tag">Fear of God</span>
+          <div class="swatch-row" aria-hidden="true">
+            <span class="swatch" style="background:#A8A39C; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
             <span class="swatch" style="background:#0E0D0C"></span>
-            <span class="swatch" style="background:#9D9183"></span>
+            <span class="swatch" style="background:#E8DFCE"></span>
           </div>
           <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
           <div class="name">
-            <span data-i18n="p11_name">Stone Island Beanie</span>
-            <span class="desc" data-i18n="p11_desc">צמר מצולע · נייבי</span>
+            <span data-i18n="p6_name">Essentials Set — Heather Grey</span>
+            <span class="desc" data-i18n="p6_desc">טי + מכנס קצר · Fear of God</span>
           </div>
-          <div class="price">₪350</div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
         </div>
       </a>
-      <!-- 12 -->
-      <a href="#" class="product">
-        <div class="product-card pc-12">
-          <span class="badge sale">−45%</span>
-          <span class="pc-mark">PT</span>
-          <span class="pc-glyph" data-i18n="p12_glyph">סווטשירט</span>
+
+      <!-- 7: Essentials Set — Oatmeal -->
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="product">
+        <div class="product-card">
+          <img class="product-img" src="photos/p7-fog-set-oatmeal.jpg" alt="Fear of God Essentials Set — Oatmeal" loading="lazy">
+          <span class="brand-tag">Fear of God</span>
+          <span class="badge lowstock" data-i18n="badge_lowstock">מלאי נמוך</span>
           <div class="swatch-row" aria-hidden="true">
-            <span class="swatch" style="background:#2A2218"></span>
-            <span class="swatch" style="background:#5C5249"></span>
+            <span class="swatch" style="background:#E8DFCE; box-shadow: 0 0 0 1px rgba(0,0,0,0.4);"></span>
+            <span class="swatch" style="background:#0E0D0C"></span>
+            <span class="swatch" style="background:#A8A39C"></span>
           </div>
           <span class="quick" data-i18n="quick_view">תצוגה מהירה</span>
         </div>
         <div class="info">
           <div class="name">
-            <span data-i18n="p12_name">Patagonia Better Sweater</span>
-            <span class="desc" data-i18n="p12_desc">פליז סרוג · יער</span>
+            <span data-i18n="p7_name">Essentials Set — Oatmeal</span>
+            <span class="desc" data-i18n="p7_desc">טי + מכנס קצר · Fear of God</span>
           </div>
-          <div class="price"><span class="strike">₪590</span><span class="now">₪320</span></div>
+          <span class="dm-link" data-i18n="dm_price">DM למחיר →</span>
         </div>
       </a>
+
     </div>
 
     <div class="view-all-row">
-      <a href="#" class="btn-ghost" data-i18n="view_all">לכל 47 הפריטים ←</a>
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="btn-ghost" data-i18n="view_all">לכל המלאי באינסטגרם ←</a>
     </div>
   </section>
 
@@ -925,24 +815,20 @@
       <span class="pill-tag" data-i18n="sale_pill">זמן מוגבל</span>
       <h2>
         <span data-i18n="sale_h2_a">אל תפספסו.</span><br>
-        <span class="gold" data-i18n="sale_h2_b">60% הנחה.</span>
+        <span class="gold" data-i18n="sale_h2_b">דרופ חדש.</span>
       </h2>
-      <p data-i18n="sale_p">הוזלות אחרונות מקולקציית הסתיו. אזל — אזל.</p>
-      <a href="#" class="btn-primary" data-i18n="sale_cta">לסייל</a>
+      <p data-i18n="sale_p">דרופ חדש כל שבוע — Stone Island ו-Essentials במלאי מוגבל. שלחו הודעה באינסטגרם לפני שאוזל.</p>
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="btn-primary" data-i18n="sale_cta">שלחו הודעה</a>
     </div>
   </section>
 
   <!-- Brands -->
   <section class="brands">
     <div class="container">
-      <p class="eyebrow eyebrow-c" data-i18n="brands_eyebrow">המותגים שאנחנו אוהבים</p>
-      <div class="brand-row">
+      <p class="eyebrow eyebrow-c" data-i18n="brands_eyebrow">המותגים שאנחנו מביאים</p>
+      <div class="brand-row" style="grid-template-columns: repeat(2, 1fr); max-width: 720px; margin-inline: auto;">
         <span class="brand-logo italic-style">Stone Island</span>
-        <span class="brand-logo bold-style">CARHARTT WIP</span>
-        <span class="brand-logo">Acne Studios</span>
-        <span class="brand-logo italic-style">Margiela</span>
-        <span class="brand-logo bold-style">PATAGONIA</span>
-        <span class="brand-logo italic-style">Our Legacy</span>
+        <span class="brand-logo bold-style">FEAR OF GOD ESSENTIALS</span>
       </div>
     </div>
   </section>
@@ -989,7 +875,7 @@
         <span class="italic" data-i18n="story_h2_b">עיצוב.</span>
       </h2>
       <p data-i18n="story_p">Bizzare נבנה לאנשים שלא הולכים אחרי — הם מובילים. אנחנו אוצרים פריטים מהמותגים שחשובים, מביאים אותם אליכם במחירים שעושים שכל, ועושים את זה לפי כלל אחד: אנחנו לא רגילים.</p>
-      <a href="#" class="story-link" data-i18n="story_link">הסיפור שלנו ←</a>
+      <a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" class="story-link" data-i18n="story_link">פנו אלינו ←</a>
     </div>
   </section>
 
@@ -1019,11 +905,9 @@
         <div>
           <h4 data-i18n="foot_shop">חנות</h4>
           <ul>
-            <li><a href="#shop" data-i18n="foot_new">חדש</a></li>
-            <li><a href="#shop" data-i18n="foot_tops">חולצות</a></li>
-            <li><a href="#shop" data-i18n="foot_bottoms">מכנסיים</a></li>
-            <li><a href="#shop" data-i18n="foot_outer">מעילים</a></li>
-            <li><a href="#sale" data-i18n="foot_sale">סייל</a></li>
+            <li><a href="#shop" data-i18n="foot_si">Stone Island</a></li>
+            <li><a href="#shop" data-i18n="foot_fog">Essentials</a></li>
+            <li><a href="#special" data-i18n="foot_special">הזמנה מיוחדת</a></li>
           </ul>
         </div>
         <div>
@@ -1039,9 +923,8 @@
           <h4 data-i18n="foot_studio">סטודיו</h4>
           <ul>
             <li><a href="#about" data-i18n="foot_about">אודות</a></li>
-            <li><a href="#" data-i18n="foot_lookbook">לוקבוק</a></li>
-            <li><a href="#" data-i18n="foot_press">פרסום</a></li>
-            <li><a href="#" data-i18n="foot_stockists">נקודות מכירה</a></li>
+            <li><a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" data-i18n="foot_lookbook">לוקבוק</a></li>
+            <li><a href="https://instagram.com/bizarreonlinee" target="_blank" rel="noopener" data-i18n="foot_press">אינסטגרם</a></li>
           </ul>
         </div>
       </div>
@@ -1057,11 +940,10 @@
   </footer>
 
   <script>
-    // Translations
     var i18n = {
       he: {
         meta_title: 'BIZZARE — בגדים מובחרים',
-        nav_shop: 'חנות', nav_new: 'חדש', nav_sale: 'סייל', nav_about: 'אודות',
+        nav_shop: 'חנות', nav_new: 'חדש', nav_sale: 'דרופ', nav_about: 'אודות',
         nav_search: 'חיפוש', nav_bag: 'סל',
         announce_1: 'משלוח חינם בקנייה מעל ₪500',
         announce_2: 'החזרה תוך 30 יום',
@@ -1075,35 +957,30 @@
         hero_cta_story: 'הסיפור שלנו',
         scroll: 'גלילה',
         cat_meta_1: '01 / חולצות', cat_label_1: 'חולצות<br>וטופים',
-        cat_meta_2: '02 / מכנסיים', cat_label_2: 'מכנסיים<br>וג׳ינסים',
-        cat_meta_3: '03 / שכבות', cat_label_3: 'מעילים',
-        cat_meta_4: '04 / השלמות', cat_label_4: 'אקססוריז',
-        cat_meta_sale: '★ סייל', cat_label_sale: 'עד 60% הנחה',
+        cat_meta_2: '02 / סטים', cat_label_2: 'סטים<br>מלאים',
+        cat_meta_3: '03 / שכבות', cat_label_3: 'סוודרים<br>וסריגים',
+        cat_meta_4: '04 / מותגים', cat_label_4: 'המותגים<br>שלנו',
+        cat_meta_sale: '★ הזמנה מיוחדת', cat_label_sale: 'כל פריט שתרצו',
         arrow: '←',
         edit_title_a: 'המבחר', edit_title_b: 'שלנו.',
-        edit_sub: 'רוטציה מצומצמת של פריטים שאנחנו באמת היינו לובשים. מתעדכן שבועית בהגעות חדשות מהמותגים שחשובים.',
-        pill_all: 'הכל', pill_tops: 'חולצות', pill_bottoms: 'מכנסיים',
-        pill_outerwear: 'מעילים', pill_accessories: 'אקססוריז',
+        edit_sub: 'בחירה מצומצמת של פריטים שיש לנו במלאי כעת — Stone Island ו-Fear of God Essentials. למחיר ולהזמנה — הודעה באינסטגרם.',
+        pill_all: 'הכל', pill_si: 'Stone Island', pill_fog: 'Essentials',
         badge_new: 'חדש', badge_lowstock: 'מלאי נמוך',
         quick_view: 'תצוגה מהירה',
-        view_all: 'לכל 47 הפריטים ←',
-        p1_name: 'Stone Island Crewneck', p1_desc: 'פליז כותנה מסורק · שחור', p1_glyph: 'סוודר',
-        p2_name: 'Carhartt WIP Detroit Jacket', p2_desc: 'חום המילטון · קנבס מבוגר', p2_glyph: 'ז׳קט',
-        p3_name: 'Acne Studios Wool Trousers', p3_desc: 'גזרה ישרה · פחם', p3_glyph: 'מכנס',
-        p4_name: 'Margiela Replica Tee', p4_desc: 'כותנה כבדה · שמנת', p4_glyph: 'חולצה',
-        p5_name: 'Patagonia Synchilla Snap-T', p5_desc: 'פליז ממוחזר · אפור אבן', p5_glyph: 'פליז',
-        p6_name: 'Our Legacy Box Shirt', p6_desc: 'פופלין צבוע · עצם', p6_glyph: 'אובר-שירט',
-        p7_name: 'Stone Island Cargo Pant', p7_desc: 'צבוע פוסט-תפירה · זית', p7_glyph: 'קרגו',
-        p8_name: 'Carhartt Single Knee Pant', p8_desc: 'קנבס דאק 12oz · שחור', p8_glyph: 'מכנסיים',
-        p9_name: 'Acne Studios Cardigan', p9_desc: 'תערובת צמר כבש · שמנת', p9_glyph: 'קרדיגן',
-        p10_name: 'Margiela 5-Pocket Pant', p10_desc: 'ג׳ינס סלוודג׳ · אינדיגו', p10_glyph: 'ג׳ינס',
-        p11_name: 'Stone Island Beanie', p11_desc: 'צמר מצולע · נייבי', p11_glyph: 'כובע',
-        p12_name: 'Patagonia Better Sweater', p12_desc: 'פליז סרוג · יער', p12_glyph: 'סווטשירט',
+        view_all: 'לכל המלאי באינסטגרם ←',
+        dm_price: 'DM למחיר ←',
+        p1_name: 'Stone Island Crewneck', p1_desc: 'פליז כותנה מסורק · שחור',
+        p2_name: 'Stone Island Crewneck', p2_desc: 'פליז כותנה מסורק · שמנת',
+        p3_name: 'Stone Island Crewneck', p3_desc: 'פליז כותנה מסורק · פחם',
+        p4_name: 'Stone Island Knit Sweater', p4_desc: 'סריג צמר · פחם',
+        p5_name: 'סט Essentials — שחור', p5_desc: 'טי + מכנס קצר · Fear of God',
+        p6_name: 'סט Essentials — אפור', p6_desc: 'טי + מכנס קצר · Fear of God',
+        p7_name: 'סט Essentials — שמנת', p7_desc: 'טי + מכנס קצר · Fear of God',
         sale_pill: 'זמן מוגבל',
-        sale_h2_a: 'אל תפספסו.', sale_h2_b: '60% הנחה.',
-        sale_p: 'הוזלות אחרונות מקולקציית הסתיו. אזל — אזל.',
-        sale_cta: 'לסייל',
-        brands_eyebrow: 'המותגים שאנחנו אוהבים',
+        sale_h2_a: 'אל תפספסו.', sale_h2_b: 'דרופ חדש.',
+        sale_p: 'דרופ חדש כל שבוע — Stone Island ו-Essentials במלאי מוגבל. שלחו הודעה באינסטגרם לפני שאוזל.',
+        sale_cta: 'שלחו הודעה',
+        brands_eyebrow: 'המותגים שאנחנו מביאים',
         special_eyebrow: 'הזמנה מיוחדת',
         special_h2_a: 'מחפשים פריט', special_h2_b: 'שלא באתר?',
         special_p: 'גם פריטים שלא רואים באתר — אפשר להשיג. שלחו לנו הודעה באינסטגרם עם מה שאתם רוצים, ונחזור אליכם עם זמינות, מחיר וזמני אספקה.',
@@ -1112,7 +989,7 @@
         story_eyebrow: 'הפילוסופיה שלנו',
         story_h2_a: 'שונים מתוך', story_h2_b: 'עיצוב.',
         story_p: 'Bizzare נבנה לאנשים שלא הולכים אחרי — הם מובילים. אנחנו אוצרים פריטים מהמותגים שחשובים, מביאים אותם אליכם במחירים שעושים שכל, ועושים את זה לפי כלל אחד: אנחנו לא רגילים.',
-        story_link: 'הסיפור שלנו ←',
+        story_link: 'פנו אלינו ←',
         nl_h3_a: 'הצטרפו', nl_h3_b: 'לרשימה.',
         nl_p: 'הראשונים לדעת על דרופים. פריטים בלעדיים לחברים. אפס ספאם.',
         nl_placeholder: 'כתובת המייל שלכם',
@@ -1120,17 +997,15 @@
         nl_thanks: 'תודה — אתם רשומים',
         foot_brand_p: 'בגדים מוקפדים לאנשים שלא רגילים. דרופים אוצריים, גזרות מדויקות, איכות אמיתית.',
         foot_shop: 'חנות', foot_help: 'עזרה', foot_studio: 'סטודיו',
-        foot_new: 'חדש', foot_tops: 'חולצות', foot_bottoms: 'מכנסיים',
-        foot_outer: 'מעילים', foot_sale: 'סייל',
+        foot_si: 'Stone Island', foot_fog: 'Essentials', foot_special: 'הזמנה מיוחדת',
         foot_shipping: 'משלוחים', foot_returns: 'החזרות',
         foot_size: 'מדריך מידות', foot_contact: 'צרו קשר',
-        foot_about: 'אודות', foot_lookbook: 'לוקבוק',
-        foot_press: 'פרסום', foot_stockists: 'נקודות מכירה',
+        foot_about: 'אודות', foot_lookbook: 'לוקבוק', foot_press: 'אינסטגרם',
         foot_copy: '© 2026 Bizzare Studio. כל הזכויות שמורות.',
       },
       en: {
         meta_title: 'BIZZARE — Considered Clothing',
-        nav_shop: 'Shop', nav_new: 'New In', nav_sale: 'Sale', nav_about: 'About',
+        nav_shop: 'Shop', nav_new: 'New In', nav_sale: 'Drop', nav_about: 'About',
         nav_search: 'Search', nav_bag: 'Bag',
         announce_1: 'Free shipping over ₪500',
         announce_2: '30-day returns',
@@ -1144,35 +1019,30 @@
         hero_cta_story: 'Our story',
         scroll: 'Scroll',
         cat_meta_1: '01 / Tops', cat_label_1: 'Tops &amp;<br>Shirts',
-        cat_meta_2: '02 / Bottoms', cat_label_2: 'Trousers<br>&amp; Denim',
-        cat_meta_3: '03 / Layers', cat_label_3: 'Outerwear',
-        cat_meta_4: '04 / Finishing', cat_label_4: 'Accessories',
-        cat_meta_sale: '★ Sale', cat_label_sale: 'Up to 60% off',
+        cat_meta_2: '02 / Sets', cat_label_2: 'Full<br>Sets',
+        cat_meta_3: '03 / Layers', cat_label_3: 'Crews<br>&amp; Knits',
+        cat_meta_4: '04 / Brands', cat_label_4: 'Our<br>Brands',
+        cat_meta_sale: '★ Special order', cat_label_sale: 'Anything you want',
         arrow: '→',
         edit_title_a: 'The', edit_title_b: 'edit.',
-        edit_sub: "A tight rotation of pieces we'd actually wear. Refreshed weekly with new arrivals from the brands that matter.",
-        pill_all: 'All', pill_tops: 'Tops', pill_bottoms: 'Bottoms',
-        pill_outerwear: 'Outerwear', pill_accessories: 'Accessories',
+        edit_sub: "A tight rotation of pieces we have in stock right now — Stone Island and Fear of God Essentials. For pricing, DM us on Instagram.",
+        pill_all: 'All', pill_si: 'Stone Island', pill_fog: 'Essentials',
         badge_new: 'New', badge_lowstock: 'Low stock',
         quick_view: 'Quick view',
-        view_all: 'View all 47 pieces →',
-        p1_name: 'Stone Island Crewneck', p1_desc: 'Brushed cotton fleece · Black', p1_glyph: 'crewneck',
-        p2_name: 'Carhartt WIP Detroit Jacket', p2_desc: 'Hamilton brown · Aged canvas', p2_glyph: 'Detroit',
-        p3_name: 'Acne Studios Wool Trousers', p3_desc: 'Tailored straight · Charcoal', p3_glyph: 'trouser',
-        p4_name: 'Margiela Replica Tee', p4_desc: 'Heavyweight cotton · Off-white', p4_glyph: 'replica',
-        p5_name: 'Patagonia Synchilla Snap-T', p5_desc: 'Recycled fleece · Stone grey', p5_glyph: 'snap-T',
-        p6_name: 'Our Legacy Box Shirt', p6_desc: 'Garment-dyed poplin · Bone', p6_glyph: 'box shirt',
-        p7_name: 'Stone Island Cargo Pant', p7_desc: 'Garment-dyed · Olive drab', p7_glyph: 'cargo',
-        p8_name: 'Carhartt Single Knee Pant', p8_desc: '12 oz duck canvas · Black', p8_glyph: 'single knee',
-        p9_name: 'Acne Studios Cardigan', p9_desc: 'Lambswool blend · Cream', p9_glyph: 'cardigan',
-        p10_name: 'Margiela 5-Pocket Pant', p10_desc: 'Selvedge denim · Indigo', p10_glyph: '5-pocket',
-        p11_name: 'Stone Island Beanie', p11_desc: 'Ribbed wool · Navy', p11_glyph: 'beanie',
-        p12_name: 'Patagonia Better Sweater', p12_desc: 'Knit fleece · Forest', p12_glyph: 'better sweater',
+        view_all: 'See full stock on Instagram →',
+        dm_price: 'DM for price →',
+        p1_name: 'Stone Island Crewneck', p1_desc: 'Brushed cotton fleece · Black',
+        p2_name: 'Stone Island Crewneck', p2_desc: 'Brushed cotton fleece · Cream',
+        p3_name: 'Stone Island Crewneck', p3_desc: 'Brushed cotton fleece · Charcoal',
+        p4_name: 'Stone Island Knit Sweater', p4_desc: 'Fine wool knit · Charcoal',
+        p5_name: 'Essentials Set — Black', p5_desc: 'Tee + shorts · Fear of God',
+        p6_name: 'Essentials Set — Heather Grey', p6_desc: 'Tee + shorts · Fear of God',
+        p7_name: 'Essentials Set — Oatmeal', p7_desc: 'Tee + shorts · Fear of God',
         sale_pill: 'Limited time',
-        sale_h2_a: "Don't sleep on this.", sale_h2_b: '60% off.',
-        sale_p: "Last-call markdowns from the autumn drop. When they're gone, they're gone.",
-        sale_cta: 'Shop sale',
-        brands_eyebrow: 'Curated brands we carry',
+        sale_h2_a: "Don't sleep on this.", sale_h2_b: 'New drop.',
+        sale_p: "New drop every week — Stone Island and Essentials in limited quantities. DM us before they're gone.",
+        sale_cta: 'Message us',
+        brands_eyebrow: 'The brands we carry',
         special_eyebrow: 'Special order',
         special_h2_a: "Want something", special_h2_b: 'not listed?',
         special_p: "After a specific piece we don't carry yet? DM us on Instagram with what you want and we'll come back to you with availability, pricing, and lead time.",
@@ -1181,7 +1051,7 @@
         story_eyebrow: 'Our philosophy',
         story_h2_a: 'Different by', story_h2_b: 'design.',
         story_p: "Bizzare was built for people who don't follow — they lead. We curate pieces from the brands that matter, bring them to you at prices that make sense, and do it all with the one rule that drives us: we don't do normal.",
-        story_link: 'Our story →',
+        story_link: 'Get in touch →',
         nl_h3_a: 'Join the', nl_h3_b: 'list.',
         nl_p: 'First dibs on drops. Members-only fits. Zero spam.',
         nl_placeholder: 'Your email address',
@@ -1189,12 +1059,10 @@
         nl_thanks: "Thanks — you're in",
         foot_brand_p: "Considered clothing for people who don't do normal. Curated drops, refined fits, real quality.",
         foot_shop: 'Shop', foot_help: 'Help', foot_studio: 'Studio',
-        foot_new: 'New in', foot_tops: 'Tops', foot_bottoms: 'Bottoms',
-        foot_outer: 'Outerwear', foot_sale: 'Sale',
+        foot_si: 'Stone Island', foot_fog: 'Essentials', foot_special: 'Special order',
         foot_shipping: 'Shipping', foot_returns: 'Returns',
         foot_size: 'Size guide', foot_contact: 'Contact',
-        foot_about: 'About', foot_lookbook: 'Lookbook',
-        foot_press: 'Press', foot_stockists: 'Stockists',
+        foot_about: 'About', foot_lookbook: 'Lookbook', foot_press: 'Instagram',
         foot_copy: '© 2026 Bizzare Studio. All rights reserved.',
       }
     };
@@ -1204,27 +1072,21 @@
       var dict = i18n[lang];
       document.documentElement.lang = lang;
       document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
-      // Translate text nodes
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined) el.innerHTML = dict[key];
       });
-      // Translate placeholders
       document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
         var key = el.getAttribute('data-i18n-placeholder');
         if (dict[key] !== undefined) el.placeholder = dict[key];
       });
-      // Title
       if (dict.meta_title) document.title = dict.meta_title;
-      // Toggle UI state
       document.querySelectorAll('.lang-toggle button').forEach(function(b) {
         b.classList.toggle('active', b.getAttribute('data-lang') === lang);
       });
-      // Persist
       try { localStorage.setItem('bz-lang', lang); } catch (e) {}
     }
 
-    // Init: persisted preference, default Hebrew
     var initialLang = 'he';
     try {
       var saved = localStorage.getItem('bz-lang');
@@ -1232,14 +1094,12 @@
     } catch (e) {}
     applyLang(initialLang);
 
-    // Toggle handlers
     document.querySelectorAll('.lang-toggle button').forEach(function(b) {
       b.addEventListener('click', function() {
         applyLang(b.getAttribute('data-lang'));
       });
     });
 
-    // Filter pills (visual only)
     document.querySelectorAll('.filter-row .pill').forEach(function(p) {
       p.addEventListener('click', function() {
         document.querySelectorAll('.filter-row .pill').forEach(function(x) { x.classList.remove('active'); });
@@ -1247,7 +1107,6 @@
       });
     });
 
-    // Newsletter mock submit
     var nlForm = document.getElementById('nlForm');
     if (nlForm) {
       nlForm.addEventListener('submit', function(e) {
